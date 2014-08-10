@@ -24,6 +24,8 @@ class WordChainer
     until @current_words.empty?
       new_current_words = explore_current_words
     end
+    path = build_path(target)
+    path
   end
 
   def explore_current_words
@@ -36,21 +38,20 @@ class WordChainer
           @all_seen_words[adjacent_word] = current_word
         end
       end
-      #print new_current_words,"\n"
       @current_words = new_current_words
-      new_current_words.each do |word|
-        print word, ":", @all_seen_words[word], "\n"
-      end
     end
   end
 
   def build_path(target)
     path = []
-    unless 
-
+    current_word = target
+    until current_word == nil
+      path << current_word
+      current_word = @all_seen_words[current_word]
+    end
+    path.reverse
   end
 end
 
 w = WordChainer.new("dictionary.txt")
-p w.adjacent_words("ink")
-p w.run("market", "hat")
+p w.run("duck", "ruby")
