@@ -1,0 +1,3 @@
+class WordChainer
+
+end
